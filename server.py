@@ -129,6 +129,9 @@ def login():
         user_query = "SELECT * FROM users WHERE email = :email LIMIT 1"
         query_data = { 'email': email }
         user = mysql.query_db(user_query, query_data)
+        if user == []:
+            flash("Invalid Email or Password")
+            return redirect('/')
         if bcrypt.check_password_hash(user[0]['password'], password):
             session['login'] = True
             query = "SELECT id FROM users WHERE email = :email"

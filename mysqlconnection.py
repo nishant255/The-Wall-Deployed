@@ -15,7 +15,7 @@ class MySQLConnection(object):
         # this will use the above values to generate the path to connect to your sql database
         DATABASE_URI = "mysql://{}:{}@127.0.0.1:{}/{}".format(config['user'], config['password'], config['port'], config['database'])
         JAWSDB_URL = "mysql://u14tlsymftgbdu86:lbpy3ds95srm80s8@s54ham9zz83czkff.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/wipvkm16mj0imit5"
-        app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['JAWSDB_URL']
+        app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('JAWSDB_URL',JAWSDB_URL)
         app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
         # establish the connection to database
         self.db = SQLAlchemy(app)
